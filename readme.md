@@ -1,7 +1,7 @@
 # Docker
 
 ## Build image:
-docker build -f Dockerfile -t spring-app:<version> .
+docker build -f Dockerfile -t spring-app:version .
 
 ## Local run:
 docker run -d --network=host app:v2
@@ -15,7 +15,7 @@ minikube dashboard
 
 ## Add image to minikube:
 https://minikube.sigs.k8s.io/docs/handbook/pushing/#2-push-images-using-cache-command
-minikube cache add spring-app:<version> *long running operation*
+minikube cache add spring-app:version *long running operation*
 
 ## Redirect network to minikube (allow hit localhost)
 minikube tunnel
