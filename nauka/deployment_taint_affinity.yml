@@ -1,0 +1,41 @@
+#w repliacationController jest apiVersion: v1
+# zeby nadac taint nodowi: kubectl taint nodes <nazwa_noda> key=value:taint-effect
+# taint effect: Noschedule, PreferNoSchedule, NoExecute
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+ name: myapp-taint-affinity-deployment
+ namespace: dev
+ labels:
+  anyLabel: anyVal
+spec:
+#ponizej piszemy template poda, jak w pod.xml
+ template:
+  metadata:
+   name: myapp-pod
+   labels:
+    innerLabel: blah
+  spec:
+   containers:
+   - name: nginx-container
+     image: nginx
+   tolerations:
+   - key: "app"
+     operator: "Equal"
+     value: "taint-name"
+     effect: "NoSchedule"
+#kubectl label nodes minikube-m02 aff=chooseMe  
+   affinity:
+    nodeAffinity:
+     requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: aff
+          operator: In
+          values:
+          - chooseMe
+ replicas: 3
+#ReplicaSet wymaga dodatkowo 'selector:'
+ selector:
+  matchLabels:
+   innerLabel: blah

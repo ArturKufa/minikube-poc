@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+ name: myapp-rc
+ labels:
+  anyLabel: anyVal
+spec:
+#ponizej piszemy template poda, jak w pod.xml
+ template:
+  metadata:
+   name: myapp-pod
+   labels:
+    anyOtherLabel: blah
+  spec:
+   containers:
+   - name: nginx-container
+     image: nginx
+ replicas: 3
+   

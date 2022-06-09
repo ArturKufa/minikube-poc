@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-app-deployment
+  labels:
+    app: my-spring-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-spring-app
+  template:
+    metadata:
+      labels:
+        app: my-spring-app
+    spec:
+      containers:
+        - name: spring-app
+          image: spring-app:v6-arg2
+          args: ["--cmdLineArgument=ozi_debil_szczeka"]
+          ports:
+            - containerPort: 8080

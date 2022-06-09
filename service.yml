@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-spring-app-service
+  labels:
+    app: my-spring-app
+spec:
+  selector:
+    app: my-spring-app
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+  type: LoadBalancer
+  loadBalancerIP: 127.0.0.10
