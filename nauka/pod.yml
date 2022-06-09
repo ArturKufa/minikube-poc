@@ -1,0 +1,18 @@
+apiVersion: v1
+
+kind: Pod
+
+metadata:
+  name: new-pod
+  labels:
+    type: server
+    anoterCustomTag: blah-blah
+    complexity: two
+
+#unique to each kind we're creating. eg Pod:
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx
+    - name: redis-container
+      image: redis
